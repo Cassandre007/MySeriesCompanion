@@ -6,28 +6,44 @@ require_once __DIR__ . '/../inc/bdd.php';
 $pdo = connexionBdd();
 
 
+if ('POST' === $_SERVER['REQUEST_METHOD']) {
+    $saisie = $_POST;
+    $nom = $saisie['nom'];
+    $resume = $saisie['resume'] ;
+    $vignette =  $saisie['vignette'];
+    $date_sortie =  $saisie['date_sortie'];
+    if ( $nom != null && $date_sortie != null){
+        ajoutSerie($pdo, $nom, $resume, $vignette, $date_sortie);
+        header('Location: index.php');
+        exit;
+    }
+}
+
 require __DIR__ . '/../inc/entete.php';
 ?>
 
 <div>
     <h2 class="collapse-title font-semibold ">Ajouter une série</h2>
-    <form action="post">
-        <label class="floating-label">
+    <form  method="post" action="">
+        <label id="nom" name="nom" class="floating-label">
             <span>Nom</span>
-            <input type="text" placeholder="Nom" class="input input-md" />
+            <input for ="nom" type="text" placeholder="Nom" class="input input-md" />
         </label>
-        <label class="floating-label">
+        <label id="resume" name="resume" class="floating-label">
             <span>Résumé</span>
-            <input type="text" placeholder="..." class="input input-md" />
+            <input  for="resume" type="text" placeholder="..." class="input input-md" />
         </label>
-        <label class="floating-label">
+        <label id="vignette" name="vignette" class="floating-label">
             <span>Vignette</span>
-            <input type="text" placeholder="..." class="input input-md" />
+            <input for="vignette" type="text" placeholder="..." class="input input-md" />
         </label>
-        <label class="input">
+        <label  id="date_sortie" name="date_sortie" class="input">
             <span class="label">Date de publication</span>
-            <input type="date" />
+            <input for="date_sortie" type="date" />
         </label>
+        <button type="submit" class="rounded-md bg-sky-700 px-4 py-2 font-semibold text-white hover:bg-sky-800">
+            Ajouter une série
+        </button>
     </form>
 
 

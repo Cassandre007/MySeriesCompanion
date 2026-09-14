@@ -9,8 +9,8 @@ $series = listerSeries($pdo);
 require __DIR__ . '/../inc/entete.php';
 ?>
 
-<h1 class="text-2xl font-bold text-slate-900">Bienvenue!</h1>
-<p class="mt-1 text-slate-500">Qu'avez-vous regardé aujourd'hui ?</p>
+<h1 class="collapse-title font-semibold">Bienvenue!</h1>
+<p class="collapse-title font-semibold">Qu'avez-vous regardé aujourd'hui ?</p>
 
 <div>
     <h2 class="collapse-title font-semibold" >Liste des séries</h2>

@@ -7,9 +7,10 @@ require_once __DIR__ . '/../inc/bdd.php';
 $pdo = connexionBdd();
 require __DIR__ . '/../inc/entete.php';
 
-$serieChoisi = (int) ($_GET['serie'] ?? 1);
-$serie = serieDetail($pdo, $serieChoisi);
-$saisons = listerSaison($pdo, $serieChoisi);
+$saisonChoisi = (int) ($_GET['saison'] ?? 1);
+$saison = saisonDetail($pdo, $saisonChoisi);
+$episodes = listerEpisode($pdo, $saisonChoisi);
+
 
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     $saisie = $_POST;
@@ -18,44 +19,42 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     $vignette =  $saisie['vignette'];
     $date_sortie =  $saisie['date_sortie'];
     $duree =  $saisie['duree'];
-    $saison_id =  $saisie['serie_id'];
+    $saison_id =  $saisie['saison_id'];
     if ( $nom != null && $date_sortie != null){
-        ajoutSaison($pdo, $nom, $resume, $vignette, $date_sortie, $serie_id);
-        header('Location: detail-serie.php');
+        ajoutEpisode($pdo, $nom, $resume, $vignette, $date_sortie, $duree, $saison_id);
+        header('Location: detail-saison.php');
         exit;
     }
 }
 
 ?>
 <div>
-        <h2 class="collapse-title font-semibold" >Detail de la série</h2>
+        <h2 class="collapse-title font-semibold" >Detail de la saison</h2>
     <article>
-        <p><?php echo htmlspecialchars($serie['nom']); ?></p>
-        <p><?php echo htmlspecialchars($serie['resume']?? ''); ?></p>
-        <p><?php echo htmlspecialchars($serie['vignette']?? ''); ?></p>
-        <p><?php echo $serie['date_sortie']; ?></p>
+        <p><?php echo htmlspecialchars($saison['nom']); ?></p>
+        <p><?php echo htmlspecialchars($saison['resume']?? ''); ?></p>
+        <p><?php echo htmlspecialchars($saison['vignette']?? ''); ?></p>
+        <p><?php echo $saison['date_sortie']; ?></p>
     </article>
 </div>
 <div>
-    <h2 class="collapse-title font-semibold" >Liste des saisons</h2>
+    <h2 class="collapse-title font-semibold" >Liste des episodes</h2>
     <?php
-    foreach ($saisons as $saison) {
+    foreach ($episodes as $episode) {
         ?>
         <article>
-            <p><?php echo htmlspecialchars($saison['nom']); ?></p>
-            <p><?php echo htmlspecialchars($saison['resume']?? ''); ?></p>
-            <p><?php echo htmlspecialchars($saison['vignette']?? ''); ?></p>
-            <p><?php echo $saison['date_sortie']; ?></p>
-            <a class="btn btn-dash btn-accent" href="detail-saison.php?saison=<?= (int) $saison['id'] ?>">
-                Détails de la saison
-            </a>
+            <p><?php echo htmlspecialchars($episode['nom']); ?></p>
+            <p><?php echo htmlspecialchars($episode['resume']?? ''); ?></p>
+            <p><?php echo htmlspecialchars($episode['vignette']?? ''); ?></p>
+            <p><?php echo $episode['date_sortie']; ?></p>
+            <p><?php echo htmlspecialchars($episode['duree']?? ''); ?></p>
         </article>
         <?php
     }
     ?>
 </div>
 <div>
-    <h2 class="collapse-title font-semibold ">Ajouter une saison</h2>
+    <h2 class="collapse-title font-semibold ">Ajouter un episode</h2>
     <form  method="post" action="">
         <label id="nom" name="nom" class="floating-label">
             <span>Nom</span>
@@ -73,9 +72,13 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
             <span class="label">Date de publication</span>
             <input for="date_sortie" type="date" />
         </label>
-        <input type="hidden" value=" <?= $serieChoisi ?>" name="serie_id">
+        <input type="hidden" value=" <?= $saisonChoisi ?>" name="saison_id">
+        <label id="duree" name="duree" class="floating-label">
+            <span>Duree</span>
+            <input for="duree" type="number" placeholder="..." class="input input-md" />
+        </label>
         <button type="submit" class="rounded-md bg-sky-700 px-4 py-2 font-semibold text-white hover:bg-sky-800">
-            Ajouter une saison
+            Ajouter un episode
         </button>
     </form>
 
