@@ -1,0 +1,27 @@
+{
+  "name": "myseriescompanion",
+  "version": "1.0.0",
+  "description": "Création d’un site internet permettant de suivre l’avancée de ses séries.",
+  "main": "index.php",
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i ./src/app.css -o public/css/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cassandre007/MySeriesCompanion.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Cassandre007/MySeriesCompanion/issues"
+  },
+  "homepage": "https://github.com/Cassandre007/MySeriesCompanion#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "daisyui": "^5.7.37",
+    "tailwindcss": "^4.3.3"
+  }
+}
+
