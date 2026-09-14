@@ -25,21 +25,21 @@ require __DIR__ . '/../inc/entete.php';
 <div>
     <h2 class="collapse-title font-semibold ">Ajouter une série</h2>
     <form  method="post" action="">
-        <label id="nom" name="nom" class="floating-label">
+        <label for="nom" class="floating-label">
             <span>Nom</span>
-            <input for ="nom" type="text" placeholder="Nom" class="input input-md" />
+            <input id="nom" name="nom"  type="text" placeholder="Nom" class="input input-md" />
         </label>
-        <label id="resume" name="resume" class="floating-label">
+        <label for="resume" class="floating-label">
             <span>Résumé</span>
-            <input  for="resume" type="text" placeholder="..." class="input input-md" />
+            <input  id="resume" name="resume" type="text" placeholder="..." class="input input-md" />
         </label>
-        <label id="vignette" name="vignette" class="floating-label">
+        <label for="vignette" class="floating-label">
             <span>Vignette</span>
-            <input for="vignette" type="text" placeholder="..." class="input input-md" />
+            <input id="vignette" name="vignette" type="text" placeholder="..." class="input input-md" />
         </label>
-        <label  id="date_sortie" name="date_sortie" class="input">
+        <label  for="date_sortie" class="input">
             <span class="label">Date de publication</span>
-            <input for="date_sortie" type="date" />
+            <input id="date_sortie" name="date_sortie" type="date" />
         </label>
         <button type="submit" class="rounded-md bg-sky-700 px-4 py-2 font-semibold text-white hover:bg-sky-800">
             Ajouter une série

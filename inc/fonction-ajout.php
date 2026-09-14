@@ -15,7 +15,7 @@ function ajoutSerie($pdo, $nom, $resume, $vignette, $date_sortie)
 function ajoutSaison($pdo, $nom, $resume, $vignette, $date_sortie, $serie_id)
 {
     $requete = $pdo->prepare("
-        INSERT INTO serie ( nom, resume, vignette, date_sortie, serie_id)
+        INSERT INTO saison ( nom, resume, vignette, date_sortie, serie_id)
         VALUES (:nom, :resume, :vignette, :date_sortie, :serie_id)
     ");
     $requete->bindParam(':nom', $nom);
@@ -29,7 +29,7 @@ function ajoutSaison($pdo, $nom, $resume, $vignette, $date_sortie, $serie_id)
 function ajoutEpisode($pdo, $nom, $resume, $vignette, $date_sortie, $duree, $saison_id)
 {
     $requete = $pdo->prepare("
-        INSERT INTO serie ( nom, resume, vignette, date_sortie, duree, saison_id)
+        INSERT INTO episode ( nom, resume, vignette, date_sortie, duree, saison_id)
         VALUES (:nom, :resume, :vignette, :date_sortie, :duree, :saison_id)
     ");
     $requete->bindParam(':nom', $nom);
