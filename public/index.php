@@ -12,22 +12,28 @@ require __DIR__ . '/../inc/entete.php';
 <h1 class="collapse-title font-semibold">Bienvenue!</h1>
 <p class="collapse-title font-semibold">Qu'avez-vous regardé aujourd'hui ?</p>
 
-<div>
-    <h2 class="collapse-title font-semibold" >Liste des séries</h2>
+<div class="w-3/4 mx-auto">
+    <ul class="list bg-base-100 rounded-box shadow-md">
+    
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Liste des séries</li>
     <?php
     foreach ($series as $serie) {
-        ?>
-        <article>
-            <p><?php echo htmlspecialchars($serie['nom']); ?></p>
-            <p><?php echo htmlspecialchars($serie['resume']?? ''); ?></p>
-            <p><?php echo htmlspecialchars($serie['vignette']?? ''); ?></p>
-            <p><?php echo $serie['date_sortie']; ?></p>
-            <a class="btn btn-dash btn-accent" href="detail-serie.php?serie=<?= (int) $serie['id'] ?>">
-                Détails
+    ?> 
+        <li class="list-row">
+            <div><img class="size-10 rounded-box" alt="Tailwind CSS list item" src="<?php echo htmlspecialchars($serie['vignette']?? ''); ?>"/></div>
+            <div>
+                <div><?php echo htmlspecialchars($serie['nom']); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $serie['date_sortie']; ?></div>
+            </div>
+            <p class="list-col-wrap text-xs"> <?php echo htmlspecialchars($serie['resume']?? ''); ?></p>
+            <a class="btn btn-ghost" href="detail-serie.php?serie=<?= (int) $serie['id'] ?>">
+            Détails
             </a>
-        </article>
-        <?php
+        </li>
+    <?php
     }
     ?>
+    </ul>
 </div>
 <?php require __DIR__ . '/../inc/pied.php'; ?>
+

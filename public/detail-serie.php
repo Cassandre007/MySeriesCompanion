@@ -27,34 +27,44 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 }
 
 ?>
-<div>
-        <h2 class="collapse-title font-semibold" >Detail de la série</h2>
-    <article>
-        <p><?php echo htmlspecialchars($serie['nom']); ?></p>
-        <p><?php echo htmlspecialchars($serie['resume']?? ''); ?></p>
-        <p><?php echo htmlspecialchars($serie['vignette']?? ''); ?></p>
-        <p><?php echo $serie['date_sortie']; ?></p>
-    </article>
+<div class="w-3/4 mx-auto">
+    <ul class="list bg-base-100 rounded-box shadow-md">
+    
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Detail de la série</li>
+        <li class="list-row">
+            <div><img class="size-10 rounded-box" alt="Tailwind CSS list item" src="<?php echo htmlspecialchars($serie['vignette']?? ''); ?>"/></div>
+            <div>
+                <div><?php echo htmlspecialchars($serie['nom']); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $serie['date_sortie']; ?></div>
+            </div>
+            <p class="list-col-wrap text-xs"> <?php echo htmlspecialchars($serie['resume']?? ''); ?></p>
+        </li>
+    </ul>
 </div>
-<div>
-    <h2 class="collapse-title font-semibold" >Liste des saisons</h2>
+<div class="w-3/4 mx-auto">
+    <ul class="list bg-base-100 rounded-box shadow-md">
+    
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Liste des saisons</li>
     <?php
     foreach ($saisons as $saison) {
-        ?>
-        <article>
-            <p><?php echo htmlspecialchars($saison['nom']); ?></p>
-            <p><?php echo htmlspecialchars($saison['resume']?? ''); ?></p>
-            <p><?php echo htmlspecialchars($saison['vignette']?? ''); ?></p>
-            <p><?php echo $saison['date_sortie']; ?></p>
-            <a class="btn btn-dash btn-accent" href="detail-saison.php?saison=<?= (int) $saison['id'] ?>">
-                Détails de la saison
+    ?> 
+        <li class="list-row">
+            <div><img class="size-10 rounded-box" alt="Tailwind CSS list item" src="<?php echo htmlspecialchars($saison['vignette']?? ''); ?>"/></div>
+            <div>
+                <div><?php echo htmlspecialchars($saison['nom']); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $saison['date_sortie']; ?></div>
+            </div>
+            <p class="list-col-wrap text-xs"> <?php echo htmlspecialchars($saison['resume']?? ''); ?></p>
+            <a class="btn btn-ghost" href="detail-saison.php?saison=<?= (int) $saison['id'] ?>">
+            Détails
             </a>
-        </article>
-        <?php
+        </li>
+    <?php
     }
     ?>
+    </ul>
 </div>
-<div>
+<div class="w-3/4 mx-auto">
     <h2 class="collapse-title font-semibold ">Ajouter une saison</h2>
     <form  method="post" action="">
         <label for="nom" class="floating-label">
@@ -78,6 +88,4 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
             Ajouter une saison
         </button>
     </form>
-
-
 </div>

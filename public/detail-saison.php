@@ -28,32 +28,42 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 }
 
 ?>
-<div>
-        <h2 class="collapse-title font-semibold" >Detail de la saison</h2>
-    <article>
-        <p><?php echo htmlspecialchars($saison['nom']); ?></p>
-        <p><?php echo htmlspecialchars($saison['resume']?? ''); ?></p>
-        <p><?php echo htmlspecialchars($saison['vignette']?? ''); ?></p>
-        <p><?php echo $saison['date_sortie']; ?></p>
-    </article>
+<div class="w-3/4 mx-auto">
+    <ul class="list bg-base-100 rounded-box shadow-md">
+    
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Detail de la saison</li>
+        <li class="list-row">
+            <div><img class="size-10 rounded-box" alt="Tailwind CSS list item" src="<?php echo htmlspecialchars($saison['vignette']?? ''); ?>"/></div>
+            <div>
+                <div><?php echo htmlspecialchars($saison['nom']); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $saison['date_sortie']; ?></div>
+            </div>
+            <p class="list-col-wrap text-xs"> <?php echo htmlspecialchars($saison['resume']?? ''); ?></p>
+        </li>
+    </ul>
 </div>
-<div>
-    <h2 class="collapse-title font-semibold" >Liste des episodes</h2>
+<div class="w-3/4 mx-auto">
+    <ul class="list bg-base-100 rounded-box shadow-md">
+    
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Liste des episodes</li>
     <?php
     foreach ($episodes as $episode) {
-        ?>
-        <article>
-            <p><?php echo htmlspecialchars($episode['nom']); ?></p>
-            <p><?php echo htmlspecialchars($episode['resume']?? ''); ?></p>
-            <p><?php echo htmlspecialchars($episode['vignette']?? ''); ?></p>
-            <p><?php echo $episode['date_sortie']; ?></p>
-            <p><?php echo htmlspecialchars($episode['duree']?? ''); ?></p>
-        </article>
-        <?php
+    ?> 
+        <li class="list-row">
+            <div><img class="size-10 rounded-box" alt="Tailwind CSS list item" src="<?php echo htmlspecialchars($episode['vignette']?? ''); ?>"/></div>
+            <div>
+                <div><?php echo htmlspecialchars($episode['nom']); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $episode['duree']?? ''; ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $episode['date_sortie']; ?></div>
+            </div>
+            <p class="list-col-wrap text-xs"> <?php echo htmlspecialchars($episode['resume']?? ''); ?></p>
+        </li>
+    <?php
     }
     ?>
+    </ul>
 </div>
-<div>
+<div class="w-3/4 mx-auto">
     <h2 class="collapse-title font-semibold ">Ajouter un episode</h2>
     <form  method="post" action="">
         <label for="nom" class="floating-label">

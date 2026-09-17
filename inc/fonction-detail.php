@@ -19,7 +19,7 @@ function saisonDetail($pdo, $id): array
         WHERE s.id = :id'
     );
     $requete->execute(['id' => $id]);
-    $serie = $requete->fetch();
+    $saison = $requete->fetch();
     return $saison;
 }
 

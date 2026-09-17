@@ -22,7 +22,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 require __DIR__ . '/../inc/entete.php';
 ?>
 
-<div>
+<div class="w-3/4 mx-auto">
     <h2 class="collapse-title font-semibold ">Ajouter une série</h2>
     <form  method="post" action="">
         <label for="nom" class="floating-label">
@@ -45,7 +45,5 @@ require __DIR__ . '/../inc/entete.php';
             Ajouter une série
         </button>
     </form>
-
-
 </div>
 <?php require __DIR__ . '/../inc/pied.php'; ?>
