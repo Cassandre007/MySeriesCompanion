@@ -22,28 +22,27 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 require __DIR__ . '/../inc/entete.php';
 ?>
 
-<div class="w-3/4 mx-auto">
+<div class="w-1/5 mx-auto">
     <h2 class="collapse-title font-semibold ">Ajouter une série</h2>
-    <form  method="post" action="">
+    <form  method="post" action="" class ="space-y-4">
         <label for="nom" class="floating-label">
             <span>Nom</span>
             <input id="nom" name="nom"  type="text" placeholder="Nom" class="input input-md" />
         </label>
         <label for="resume" class="floating-label">
             <span>Résumé</span>
-            <input  id="resume" name="resume" type="text" placeholder="..." class="input input-md" />
+            <input  id="resume" name="resume" type="text" placeholder="Résumé...(facultatif)" class="input input-md" />
         </label>
         <label for="vignette" class="floating-label">
             <span>Vignette</span>
-            <input id="vignette" name="vignette" type="text" placeholder="..." class="input input-md" />
+            <input id="vignette" name="vignette" type="text" placeholder="Vignette...(facultatif)" class="input input-md" />
         </label>
         <label  for="date_sortie" class="input">
             <span class="label">Date de publication</span>
             <input id="date_sortie" name="date_sortie" type="date" />
         </label>
-        <button type="submit" class="rounded-md bg-sky-700 px-4 py-2 font-semibold text-white hover:bg-sky-800">
+        <button type="submit" class="btn btn-block  btn-neutral">
             Ajouter une série
         </button>
     </form>
 </div>
-<?php require __DIR__ . '/../inc/pied.php'; ?>

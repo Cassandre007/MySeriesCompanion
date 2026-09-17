@@ -63,20 +63,20 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     ?>
     </ul>
 </div>
-<div class="w-3/4 mx-auto">
+<div class="w-1/5 mx-auto">
     <h2 class="collapse-title font-semibold ">Ajouter un episode</h2>
-    <form  method="post" action="">
+    <form  method="post" action="" class ="space-y-4">
         <label for="nom" class="floating-label">
             <span>Nom</span>
             <input id="nom" name="nom"  type="text" placeholder="Nom" class="input input-md" />
         </label>
         <label for="resume" class="floating-label">
             <span>Résumé</span>
-            <input  id="resume" name="resume" type="text" placeholder="..." class="input input-md" />
+            <input  id="resume" name="resume" type="text" placeholder="Résumé...(facultatif)" class="input input-md" />
         </label>
         <label for="vignette" class="floating-label">
             <span>Vignette</span>
-            <input id="vignette" name="vignette" type="text" placeholder="..." class="input input-md" />
+            <input id="vignette" name="vignette" type="text" placeholder="Vignette...(facultatif)" class="input input-md" />
         </label>
         <label  for="date_sortie" class="input">
             <span class="label">Date de publication</span>
@@ -85,9 +85,9 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         <input type="hidden" value="<?= $saisonChoisi ?>" name="saison_id">
         <label for="duree" class="floating-label">
             <span>Duree</span>
-            <input id="duree" name="duree" type="number" placeholder="..." class="input input-md" />
+            <input id="duree" name="duree" type="number" placeholder="Durée...(facultatif) " class="input input-md" />
         </label>
-        <button type="submit" class="rounded-md bg-sky-700 px-4 py-2 font-semibold text-white hover:bg-sky-800">
+        <button type="submit" class="btn btn-block  btn-neutral">
             Ajouter un episode
         </button>
     </form>

@@ -13,7 +13,7 @@ declare(strict_types=1);
     <link href="css/output.css" rel="stylesheet">
 
 </head>
-<body class="bg-base-100 text-base-content">
+<body class="bg-base-100 text-base-content space-y-8">
 <header>
     <div class="navbar bg-neutral shadow-sm">
         <div class="flex-1">
@@ -24,4 +24,4 @@ declare(strict_types=1);
         </div>
     </div>
 </header>
-<main class="space-y-6">
+<main class= "space-y-8">
