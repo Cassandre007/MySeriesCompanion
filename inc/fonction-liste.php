@@ -31,3 +31,20 @@ function listerEpisode(PDO $pdo, int $id): array
     $saisons = $requete->fetchAll();
     return $saisons;
 }
+
+function dateFr(string $dateIso): string
+{
+    $date = DateTimeImmutable::createFromFormat('!Y-m-d', $dateIso);
+
+    if (false === $date || $date->format('Y-m-d') !== $dateIso) {
+        return '';
+    }
+
+    return $date->format('d/m/Y');
+}
+
+function e(?string $valeur): string
+{
+    return htmlspecialchars($valeur ?? '', ENT_QUOTES, 'UTF-8');
+}
+

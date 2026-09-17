@@ -20,12 +20,20 @@ require __DIR__ . '/../inc/entete.php';
     foreach ($series as $serie) {
     ?> 
         <li class="list-row">
-            <div><img class="size-10 rounded-box" alt="Tailwind CSS list item" src="<?php echo htmlspecialchars($serie['vignette']?? ''); ?>"/></div>
-            <div>
-                <div><?php echo htmlspecialchars($serie['nom']); ?></div>
-                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $serie['date_sortie']; ?></div>
+            <div class = "w-32">
+            <?php
+                if($serie['vignette']!= null) {
+            ?>
+                <img class="rounded-xl" alt="Tailwind CSS list item" src="<?= e($serie['vignette']); ?>"/>
+            <?php
+                }
+            ?>
             </div>
-            <p class="list-col-wrap text-xs"> <?php echo htmlspecialchars($serie['resume']?? ''); ?></p>
+            <div class= "space-y-2">
+                <div><?= e($serie['nom']); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?= dateFr($serie['date_sortie']); ?></div>
+                <p class="list-col-wrap text-xs"> <?= e($serie['resume']); ?></p>
+            </div>
             <a class="btn btn-ghost" href="detail-serie.php?serie=<?= (int) $serie['id'] ?>">
             Détails
             </a>

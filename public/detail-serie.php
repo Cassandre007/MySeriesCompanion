@@ -13,17 +13,16 @@ $saisons = listerSaison($pdo, $serieChoisi);
 
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     $saisie = $_POST;
-    $nom = $saisie['nom'];
-    $resume = $saisie['resume'] ;
-    $vignette =  $saisie['vignette'];
-    $date_sortie =  $saisie['date_sortie'];
-    $serie_id =  $saisie['serie_id'];
-    var_dump($serie_id);
-    if ( $nom != null && $date_sortie != null){
+    $nom = $saisie['nom'] ?? null;
+    $resume = $saisie['resume'] ?? null;
+    $vignette =  $saisie['vignette'] ?? null;
+    $date_sortie =  $saisie['date_sortie'] ?? null;
+    $serie_id =  $saisie['serie_id'] ?? null;
+    if ( $nom != null && $date_sortie != null && $serie_id != null){
         ajoutSaison($pdo, $nom, $resume, $vignette, $date_sortie, $serie_id);
-        header('Location: detail-serie.php?serie=' . $serie_id);
-        exit;
     }
+    header('Location: detail-serie.php?serie=' . $serie_id);
+    exit;
 }
 
 ?>
@@ -32,12 +31,20 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     
     <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Detail de la série</li>
         <li class="list-row">
-            <div><img class="size-10 rounded-box" alt="Tailwind CSS list item" src="<?php echo htmlspecialchars($serie['vignette']?? ''); ?>"/></div>
-            <div>
-                <div><?php echo htmlspecialchars($serie['nom']); ?></div>
-                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $serie['date_sortie']; ?></div>
+            <div class = "w-32">
+            <?php
+                if($serie['vignette']!= null) {
+            ?>
+                <img class="rounded-xl" alt="Tailwind CSS list item" src="<?= e($serie['vignette']); ?>"/>
+            <?php
+                }
+            ?>
             </div>
-            <p class="list-col-wrap text-xs"> <?php echo htmlspecialchars($serie['resume']?? ''); ?></p>
+            <div class= "space-y-2">
+                <div><?= e($serie['nom']); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?= dateFr($serie['date_sortie']); ?></div>
+                <p class="list-col-wrap text-xs"> <?= e($serie['resume']); ?></p>
+            </div>
         </li>
     </ul>
 </div>
@@ -49,12 +56,20 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     foreach ($saisons as $saison) {
     ?> 
         <li class="list-row">
-            <div><img class="size-10 rounded-box" alt="Tailwind CSS list item" src="<?php echo htmlspecialchars($saison['vignette']?? ''); ?>"/></div>
-            <div>
-                <div><?php echo htmlspecialchars($saison['nom']); ?></div>
-                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $saison['date_sortie']; ?></div>
+            <div class = "w-32">
+            <?php
+                if($saison['vignette']!= null) {
+            ?>
+                <img class="rounded-xl" alt="Tailwind CSS list item" src="<?= e($saison['vignette']); ?>"/>
+            <?php
+                }
+            ?>
             </div>
-            <p class="list-col-wrap text-xs"> <?php echo htmlspecialchars($saison['resume']?? ''); ?></p>
+            <div class= "space-y-2">
+                <div><?= e($saison['nom']); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?= dateFr($saison['date_sortie']); ?></div>
+                <p class="list-col-wrap text-xs"> <?= e($saison['resume']); ?></p>
+            </div>
             <a class="btn btn-ghost" href="detail-saison.php?saison=<?= (int) $saison['id'] ?>">
             Détails
             </a>
@@ -89,3 +104,4 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         </button>
     </form>
 </div>
+<?php require __DIR__ . '/../inc/pied.php'; ?>

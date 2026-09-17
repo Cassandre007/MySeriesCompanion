@@ -10,6 +10,7 @@ function ajoutSerie($pdo, $nom, $resume, $vignette, $date_sortie)
     $requete->bindParam(':vignette', $vignette);
     $requete->bindParam(':date_sortie', $date_sortie);
     $requete->execute();
+    return $pdo->lastInsertId();
 }
 
 function ajoutSaison($pdo, $nom, $resume, $vignette, $date_sortie, $serie_id)

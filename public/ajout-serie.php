@@ -8,15 +8,17 @@ $pdo = connexionBdd();
 
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     $saisie = $_POST;
-    $nom = $saisie['nom'];
-    $resume = $saisie['resume'] ;
-    $vignette =  $saisie['vignette'];
-    $date_sortie =  $saisie['date_sortie'];
+    $nom = $saisie['nom'] ?? null;
+    $resume = $saisie['resume'] ?? null;
+    $vignette =  $saisie['vignette'] ?? null;
+    $date_sortie =  $saisie['date_sortie'] ?? null;
     if ( $nom != null && $date_sortie != null){
-        ajoutSerie($pdo, $nom, $resume, $vignette, $date_sortie);
-        header('Location: index.php');
+        $id = ajoutSerie($pdo, $nom, $resume, $vignette, $date_sortie);
+        header("Location: detail-serie.php?serie=" . (int) $id);
         exit;
     }
+    header("Location: ajout-serie.php");
+    exit;
 }
 
 require __DIR__ . '/../inc/entete.php';
@@ -46,3 +48,5 @@ require __DIR__ . '/../inc/entete.php';
         </button>
     </form>
 </div>
+<?php require __DIR__ . '/../inc/pied.php'; ?>
+

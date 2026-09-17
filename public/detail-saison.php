@@ -14,17 +14,17 @@ $episodes = listerEpisode($pdo, $saisonChoisi);
 
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     $saisie = $_POST;
-    $nom = $saisie['nom'];
-    $resume = $saisie['resume'] ;
-    $vignette =  $saisie['vignette'];
-    $date_sortie =  $saisie['date_sortie'];
-    $duree =  $saisie['duree'];
-    $saison_id =  $saisie['saison_id'];
-    if ( $nom != null && $date_sortie != null){
+    $nom = $saisie['nom'] ?? null;
+    $resume = $saisie['resume'] ?? null;
+    $vignette =  $saisie['vignette'] ?? null;
+    $date_sortie =  $saisie['date_sortie'] ?? null;
+    $duree =  $saisie['duree'] ?? null;
+    $saison_id =  $saisie['saison_id'] ?? null;
+    if ( $nom != null && $date_sortie != null && $saison_id != null){
         ajoutEpisode($pdo, $nom, $resume, $vignette, $date_sortie, $duree, $saison_id);
-        header('Location: detail-saison.php');
-        exit;
     }
+    header('Location: detail-saison.php?saison=' . (int) $saison_id);
+    exit;
 }
 
 ?>
@@ -33,12 +33,20 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     
     <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Detail de la saison</li>
         <li class="list-row">
-            <div><img class="size-10 rounded-box" alt="Tailwind CSS list item" src="<?php echo htmlspecialchars($saison['vignette']?? ''); ?>"/></div>
-            <div>
-                <div><?php echo htmlspecialchars($saison['nom']); ?></div>
-                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $saison['date_sortie']; ?></div>
+            <div class = "w-32">
+            <?php
+                if($saison['vignette']!= null) {
+            ?>
+                <img class="rounded-xl" alt="Tailwind CSS list item" src="<?= e($saison['vignette']); ?>"/>
+            <?php
+                }
+            ?>
             </div>
-            <p class="list-col-wrap text-xs"> <?php echo htmlspecialchars($saison['resume']?? ''); ?></p>
+            <div class= "space-y-2">
+                <div><?= e($saison['nom']); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?= dateFr($saison['date_sortie']); ?></div>
+                <p class="list-col-wrap text-xs"> <?= e($saison['resume']); ?></p>
+            </div>
         </li>
     </ul>
 </div>
@@ -50,13 +58,27 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     foreach ($episodes as $episode) {
     ?> 
         <li class="list-row">
-            <div><img class="size-10 rounded-box" alt="Tailwind CSS list item" src="<?php echo htmlspecialchars($episode['vignette']?? ''); ?>"/></div>
-            <div>
-                <div><?php echo htmlspecialchars($episode['nom']); ?></div>
-                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $episode['duree']?? ''; ?></div>
-                <div class="text-xs uppercase font-semibold opacity-60"><?php echo $episode['date_sortie']; ?></div>
+            <div class = "w-32">
+            <?php
+                if($saison['vignette']!= null) {
+            ?>
+                <img class="rounded-xl" alt="Tailwind CSS list item" src="<?= e($episode['vignette']); ?>"/>
+            <?php
+                }
+            ?>
             </div>
-            <p class="list-col-wrap text-xs"> <?php echo htmlspecialchars($episode['resume']?? ''); ?></p>
+            <div class= "space-y-2">
+                <div><?= e($episode['nom']); ?></div>
+                <?php
+                if($episode['duree']!= 0) {
+                ?>
+                <div class="text-xs uppercase font-semibold opacity-60"><?= $episode['duree'] . ' minutes'; ?></div>
+                <?php
+                    }
+                ?>
+                <div class="text-xs uppercase font-semibold opacity-60"><?= dateFr($episode['date_sortie']); ?></div>
+                <p class="list-col-wrap text-xs"> <?= e($episode['resume']); ?></p>
+            </div>
         </li>
     <?php
     }
@@ -91,6 +113,5 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
             Ajouter un episode
         </button>
     </form>
-
-
 </div>
+<?php require __DIR__ . '/../inc/pied.php'; ?>
