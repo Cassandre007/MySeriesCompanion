@@ -9,9 +9,13 @@ $series = listerSeries($pdo);
 require __DIR__ . '/../inc/entete.php';
 ?>
 
-<h1 class="collapse-title font-semibold">Bienvenue!</h1>
-<p class="collapse-title font-semibold">Qu'avez-vous regardé aujourd'hui ?</p>
-
+<div class="w-3/4 mx-auto">
+    <h1 class="collapse-title font-semibold">Bienvenue!</h1>
+    <p class="collapse-title font-semibold">Qu'avez-vous regardé aujourd'hui ?</p>
+</div>
+<?php
+if($series!= null) {
+?>
 <div class="w-3/4 mx-auto">
     <ul class="list bg-base-100 rounded-box shadow-md">
     
@@ -43,5 +47,15 @@ require __DIR__ . '/../inc/entete.php';
     ?>
     </ul>
 </div>
+<?php
+} 
+else{
+?>
+<div class="w-3/4 mx-auto">
+    <p class="collapse-title font-semibold">Il n'y a pas de série enregistrée</p>
+</div>
+<?php
+}
+?>
 <?php require __DIR__ . '/../inc/pied.php'; ?>
 

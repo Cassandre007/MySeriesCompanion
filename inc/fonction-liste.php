@@ -5,7 +5,7 @@ function listerSeries($pdo): array
         'SELECT s.*
         FROM serie s'
     )->fetchAll();
-    return $requete;
+    return $requete ?? null;
 }
 
 function listerSaison(PDO $pdo, int $id): array
@@ -17,7 +17,7 @@ function listerSaison(PDO $pdo, int $id): array
     );
     $requete->execute(['serie_id' => $id]);
     $saisons = $requete->fetchAll();
-    return $saisons;
+    return $saisons ?? null;
 }
 
 function listerEpisode(PDO $pdo, int $id): array
@@ -29,7 +29,7 @@ function listerEpisode(PDO $pdo, int $id): array
     );
     $requete->execute(['saison_id' => $id]);
     $saisons = $requete->fetchAll();
-    return $saisons;
+    return $saisons ?? null;
 }
 
 function dateFr(string $dateIso): string

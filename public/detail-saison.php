@@ -50,6 +50,9 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         </li>
     </ul>
 </div>
+<?php
+if($episodes!= null) {
+?>
 <div class="w-3/4 mx-auto">
     <ul class="list bg-base-100 rounded-box shadow-md">
     
@@ -85,6 +88,16 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     ?>
     </ul>
 </div>
+<?php
+} 
+else{
+?>
+<div class="w-3/4 mx-auto">
+    <p class="collapse-title font-semibold">Il n'y a pas d'episodes pour l'instant</p>
+</div>
+<?php
+}
+?>
 <div class="w-1/5 mx-auto">
     <h2 class="collapse-title font-semibold ">Ajouter un episode</h2>
     <form  method="post" action="" class ="space-y-4">
