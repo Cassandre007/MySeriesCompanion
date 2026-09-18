@@ -5,12 +5,10 @@ require_once __DIR__ . '/../inc/fonction-liste.php';
 require_once __DIR__ . '/../inc/fonction-ajout.php';
 require_once __DIR__ . '/../inc/bdd.php';
 $pdo = connexionBdd();
-require __DIR__ . '/../inc/entete.php';
 
 $saisonChoisi = (int) ($_GET['saison'] ?? 1);
 $saison = saisonDetail($pdo, $saisonChoisi);
 $episodes = listerEpisode($pdo, $saisonChoisi);
-
 
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     $saisie = $_POST;
@@ -26,6 +24,8 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     header('Location: detail-saison.php?saison=' . (int) $saison_id);
     exit;
 }
+
+require __DIR__ . '/../inc/entete.php';
 
 ?>
 <div class="w-3/4 mx-auto">
@@ -63,7 +63,7 @@ if($episodes!= null) {
         <li class="list-row">
             <div class = "w-32">
             <?php
-                if($saison['vignette']!= null) {
+                if($episode['vignette']!= null) {
             ?>
                 <img class="rounded-xl" alt="Tailwind CSS list item" src="<?= e($episode['vignette']); ?>"/>
             <?php

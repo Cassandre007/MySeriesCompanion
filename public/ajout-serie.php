@@ -5,7 +5,6 @@ require_once __DIR__ . '/../inc/bdd.php';
 
 $pdo = connexionBdd();
 
-
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     $saisie = $_POST;
     $nom = $saisie['nom'] ?? null;
@@ -22,6 +21,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 }
 
 require __DIR__ . '/../inc/entete.php';
+
 ?>
 
 <div class="w-1/5 mx-auto">

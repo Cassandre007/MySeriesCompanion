@@ -5,7 +5,6 @@ require_once __DIR__ . '/../inc/fonction-liste.php';
 require_once __DIR__ . '/../inc/fonction-ajout.php';
 require_once __DIR__ . '/../inc/bdd.php';
 $pdo = connexionBdd();
-require __DIR__ . '/../inc/entete.php';
 
 $serieChoisi = (int) ($_GET['serie'] ?? 1);
 $serie = serieDetail($pdo, $serieChoisi);
@@ -21,11 +20,14 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     if ( $nom != null && $date_sortie != null && $serie_id != null){
         ajoutSaison($pdo, $nom, $resume, $vignette, $date_sortie, $serie_id);
     }
-    header('Location: detail-serie.php?serie=' . $serie_id);
+    header('Location: detail-serie.php?serie=' . (int) $serie_id);
     exit;
 }
 
+require __DIR__ . '/../inc/entete.php';
+
 ?>
+
 <div class="w-3/4 mx-auto">
     <ul class="list bg-base-100 rounded-box shadow-md">
     

@@ -7,6 +7,7 @@ $pdo = connexionBdd();
 $series = listerSeries($pdo);
 
 require __DIR__ . '/../inc/entete.php';
+
 ?>
 
 <div class="w-3/4 mx-auto">
